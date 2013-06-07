@@ -1,5 +1,11 @@
 function School(name, town, classes){
-
+    this.name = name;
+    this.town = town;
+    this.classes = [];
+    
+    for (var i = 0; i < classes.length; i++) {
+        this.classes[i] = classes[i];
+	};
 }
 
 function SchoolClass(name, capacity, formTeacher, students){

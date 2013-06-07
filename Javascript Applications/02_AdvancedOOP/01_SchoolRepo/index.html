@@ -1,0 +1,38 @@
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta charset=utf-8>
+        <title>title</title>
+
+        <script type="text/javascript" src="js/school-classic-oop.js"></script>
+        <script type="text/javascript">
+            var students = [
+                new Student("Petar", "Petarov", 6),
+                new Student("Gosho", "Ginchev", 6)
+            ]
+            
+            var student3 = new Student("Veronika", "Peykova", 6);
+            
+            var mathTeacher = new Teacher("Gospodin", "Gospodinov", "Math");
+            var musicTeacher = new Teacher("Lybomir", "Pipkov", "Music");
+
+            var mathClass = new SchoolClass("Math", 3, mathTeacher, students);
+            mathClass.addStudent(student3);
+            
+            var musicClass = new SchoolClass("Music", 2, musicTeacher, students);
+            
+            var school = new School("My School", "Plovdiv", [mathClass, musicClass]);
+            
+            console.log(school);
+        </script>
+
+    </head>
+    <body>
+        body
+    </body>
+</html>
