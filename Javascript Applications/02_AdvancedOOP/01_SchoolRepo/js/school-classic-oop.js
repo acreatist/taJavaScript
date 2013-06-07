@@ -19,12 +19,20 @@ function SchoolClass(name, capacity, formTeacher, students){
 	};
 }
 
+/* Add a student */
 SchoolClass.prototype.addStudent = function(student){
 	if (this.students.length >= this.capacity) {
 		throw "Class capacity filled";
 	};
 
 	this.students.push(student);
+}
+
+/* Introduce all students one by one */
+SchoolClass.prototype.introduceStudents = function(){
+	for (var i = 0; i < this.students.length; i++) {
+		console.log("Student " + (i+1) + ": " + this.students[i].introduce());
+	};
 }
 
 /**
@@ -57,7 +65,7 @@ function Student(fname, lname, grade){
 	this.grade = grade;
 
 	Person.apply(this, arguments);
-	Person.call(this, fname, lname);
+	// Person.call(this, fname, lname);
 }
 
 Student.prototype = new Person();
@@ -77,7 +85,7 @@ function Teacher(fname, lname, specialty){
 	this.specialty = specialty;
 
 	Person.apply(this, arguments);
-	Person.call(this, fname, lname);
+	// Person.call(this, fname, lname);
 }
 
 Teacher.prototype = new Person();

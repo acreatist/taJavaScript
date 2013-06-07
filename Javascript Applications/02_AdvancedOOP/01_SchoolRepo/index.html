@@ -8,8 +8,14 @@
         <meta charset="utf-8">
         <meta charset=utf-8>
         <title>title</title>
+        
+        <!-- CLASSIC OOP, CLASSICAL INHERITANCE -->
+        <!--<script type="text/javascript" src="js/school-classic-oop.js"></script>-->
 
-        <script type="text/javascript" src="js/school-classic-oop.js"></script>
+        <!-- CLASSIC OOP, BETTER INHERITANCE WITH Class.create method -->
+        <script type="text/javascript" src="js/classCreate.js"></script>
+        <script type="text/javascript" src="js/school-classic-oop-pattern.js"></script>
+
         <script type="text/javascript">
             var students = [
                 new Student("Petar", "Petarov", 6),
@@ -27,8 +33,11 @@
             var musicClass = new SchoolClass("Music", 2, musicTeacher, students);
             
             var school = new School("My School", "Plovdiv", [mathClass, musicClass]);
-            
-            console.log(school);
+
+            /* Introduce all students in school classes */
+            for (var i = 0; i < school.classes.length; i++) {            
+                school.classes[i].introduceStudents();
+            }
         </script>
 
     </head>
