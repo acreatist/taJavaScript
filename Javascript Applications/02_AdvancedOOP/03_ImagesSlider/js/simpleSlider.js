@@ -43,8 +43,7 @@ var acmeSlider = (function(){
 		},
 
 		hide: function(){
-			console.log(this.imageHolder)
-			this.imageHolder.display = "none";
+			this.imageHolder.style.display = "none";
 		}
 	});
 

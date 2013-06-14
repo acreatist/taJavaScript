@@ -1,0 +1,30 @@
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta charset=utf-8>
+        <title>title</title>
+		
+		<script type="text/javascript" src="js/classCreate.js"></script>
+		<script type="text/javascript" src="js/simpleFavourites.js"></script>
+
+		<script type="text/javascript">
+			window.onload = function(){
+				var bar = SimpleFavourites("favourites-bar");
+				var barFolder = bar.AddNewFolder("Demo");
+					barFolder.addItem("url1", "#");
+					barFolder.addItem("url2", "#");
+				bar.AddNewFolder("HTML");
+
+				bar.Render();
+			}
+		</script>
+    </head>
+    <body>
+        <div id="favourites-bar"></div>
+    </body>
+</html>
