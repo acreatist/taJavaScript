@@ -11,7 +11,7 @@ var School = Class.create({
 });
 
 var SchoolClass = Class.create({
-	init : function(capacity, formTeacher, students){
+	init : function(capacity, capacity, formTeacher, students){
 		this.name = name;
 		this.capacity = capacity;
 		this.formTeacher = formTeacher;
@@ -31,12 +31,9 @@ var SchoolClass = Class.create({
 	},
 
 	introduceStudents : function(){		
-		// for (var i = 0; i < this.students.length; i++) {		
-		// 	console.log("Student " + (i+1) + ": " + this.students[i].introduce());
-		// };
-		for (var studentSay in this.students){
-			console.log("Student " + (i+1) + ": " + this.students[studentSay].introduce());
-		}
+		for (var i = 0; i < this.students.length; i++) {		
+			console.log("Student " + (i+1) + ": " + this.students[i].introduce());
+		};
 	}
 });
 

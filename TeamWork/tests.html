@@ -19,6 +19,7 @@
 	</body>
 	<script type="text/javascript" src="Box2dWeb-2.1.a.3.js"></script>
 	<script type="text/javascript" src="requestAnimationFrame.shim.js"></script>
+	<script type="text/javascript" src="objects-definitions.js"></script>
 
 	<script type="text/javascript">
 		
@@ -44,10 +45,52 @@
 				world = new b2World(gravity, asleep);
 
 				createFloor();
-
+				
 				// Objects:
-				createRectBody(40, 180, 30, 50);
-				createRectBody(60, 0, 30, 50);
+				var obj = new B2Object({scale: scale});
+				var simpleObj = obj.createRectBody({
+					xpos: 150,
+					ypos: 0,
+					width: 30,
+					height: 50,
+					name: "test1",
+					life: 250
+				});
+
+				var obj2 = new B2Object({scale: scale});
+				var simpleObj2 = obj2.createRectBody({
+					xpos: 120,
+					ypos: 300,
+					width: 30,
+					height: 50,
+					name: "test2",
+					life: 250
+				});
+
+
+				var objRect = new B2Object({scale: scale});
+				var jointObjRect = objRect.createRectBody({
+					xpos: 460,
+					ypos: 20,
+					width: 20,
+					height: 20
+				});
+
+				var objPoli = new B2Object({scale: scale});
+				var jointObjPoli = objPoli.createPoligon({
+					xpos: 470,
+					ypos: 50,
+					width: 30,
+					height: 50
+				});
+
+				var jointDef = new b2RevoluteJointDef;
+				var jointCenter = new b2Vec2(470/scale, 50/scale);
+				jointDef.Initialize(jointObjRect, jointObjPoli, jointCenter);
+
+				world.CreateJoint(jointDef);
+
+				listenForContacts(simpleObj);
 
 				setupDebugDraw();
 				animate();
@@ -99,27 +142,22 @@
 				setTimeout(animate, timeStep);
 			}
 
-			/*----------------
-			*	OBJECTS 	*
-			*	----------   */
+			function listenForContacts(obj){
 
-			function createRectBody(xpos, ypos, width, height){
-				var bodyDef = new b2BodyDef;
-				bodyDef.type = b2Body.b2_dynamicBody;
-				bodyDef.position.x = xpos/scale;
-				bodyDef.position.y = ypos/scale;
+				var listener = new Box2D.Dynamics.b2ContactListener;
 				
-				var fixtureDef = new b2FixtureDef;
-				fixtureDef.density = 1.0;
-				fixtureDef.friction = 0.5;
-				fixtureDef.restitution = 0.3;
-				fixtureDef.shape = new b2PolygonShape;
-				fixtureDef.shape.SetAsBox(width/scale, height/scale);
-				
-				var body = world.CreateBody(bodyDef);
-				var fixture = body.CreateFixture(fixtureDef);
+				listener.PostSolve = function(contact, impulse){
+					var body1 = contact.GetFixtureA().GetBody();
+					var body2 = contact.GetFixtureB().GetBody();
+
+					if (body1 == obj || body2 == obj){
+						var impulseAlongNormal = impulse.normalImpulses[0];
+						obj.GetUserData().life -= impulseAlongNormal;
+			
+						console.log("The special body was in a collision with impulse", impulseAlongNormal,"and its life has now become ",obj.GetUserData().life);
+					}
+				};
+				world.SetContactListener(listener);
 			}
-
-		
 	</script>
 </html>
